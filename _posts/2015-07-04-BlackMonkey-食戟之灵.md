@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Black Monkey Pro Shokugeki no Soma 食戟のソーマ Fertilize 肥やします
+title:      食戟のソーマ 
 date:       2015-07-01 12:32:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
