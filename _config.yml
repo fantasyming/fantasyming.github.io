@@ -1,0 +1,31 @@
+# Site settings
+title: "Fantasy"
+email: finalfanatsy@gmail.com
+description: "A dark blog theme for Jekyll."
+baseurl: ""
+url: "http://fantasy1993612.github.io."
+title_description: "Welcome To My Blog"
+title_image: "https://avatars3.githubusercontent.com/u/10782500?v=3&u=c28a06d76d4b976da2c33091e7e1047edaced0e9&s=140"
+google_analytics: "UA-20365477-4"
+disqus_account: fantasy
+github_repository: https://github.com/fantasy1993612/
+
+post_limit: 5
+
+# Social usernames/URLs
+#twitter_username: _jacobtomlinson
+github_username:  fantasy1993612
+#linkedin_link: http://carte-noire.jacobtomlinson.co.uk/
+#google_plus_link: http://carte-noire.jacobtomlinson.co.uk/
+#stackoverflow_link: http://carte-noire.jacobtomlinson.co.uk/
+
+# Footer
+footer_left: "Made with By Fantasy"
+footer_right: 
+
+# Build settings
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables","strikethrough", "superscript"]
+permalink: pretty
+exclude: [vendor]

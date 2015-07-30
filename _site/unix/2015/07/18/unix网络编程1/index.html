@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<meta charset="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--<title>unix网络编程1</title>-->
+<meta name="description" content="A dark blog theme for Jekyll.">
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/jquery.mmenu.all.css" />
+<link rel="stylesheet" href="/css/highlightjs.piperita.css">
+
+<!-- Favicons generated at http://realfavicongenerator.net/ -->
+<!--
+<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/manifest.json">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+-->
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-513c6fa83da6ec67"></script>
+
+</head>
+
+
+    <body>
+
+    <nav id="my-menu">
+  <div>
+    <p>Fantasy</p>
+    <ul class="pages">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/posts/"><i class="fa fa-archive"></i> All Posts</a></li>
+      <li><a href="/search/"><i class="fa fa-search"></i> Search</a></li>
+    </ul>
+    <p class="links">
+      
+      
+      
+      <a href="https://github.com/fantasy1993612" target="_new"><i class="fa fa-github-alt"></i></a>
+      
+      <a href="http://www.jacobtomlinson.co.uk/feed.xml" target="_new"><i class="fa fa-rss"></i></a>
+    </p>
+  </div>
+</nav>
+<div class="menu-button" href="#menu"><i class="fa fa-bars"></i></div>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      
+  
+  
+
+
+<div class="container-fluid single">
+  <div class="row">
+
+    <div itemscope itemtype="http://schema.org/Article" class="col-md-12 article">
+      
+      <div class="thumb">
+        <img itemprop="image" src="http://i.imgur.com/aRQcGSi.png" alt="Thumbnail: jekyll" />
+      </div>
+      
+
+      <h1 class="header" itemprop="name">unix网络编程1</h1>
+
+      <div class="author">
+        <small><i>
+          by
+          <span itemprop="author">
+            
+            
+            
+          </span>
+          on <span itemprop="datePublished" content="2014-08-28">July 18, 2015</span>
+          under unix
+        </i></small>
+      </div>
+
+      <div class="read-time">
+        <small>
+          1 minute read
+        </small>
+      </div>
+
+      <div class="content-panel content">
+        <span itemprop="articleBody"><ul>
+<li><p>通过学习unix网络编程，在不使用任何库只使用api的情况下实现一个内置lua解释器的web服务器，实现简单的业务逻辑，比如通过cgi模式在web浏览器中显示图片，播放视频，可以在不重启服务器的情况下更新业务逻辑。</p></li>
+<li><p>主要是学习unix网络编程做的笔记，其中将插入网络编程
+的基础知识，会有多进程版，I/O复用，多线程版本，每个web
+服务器的吞吐量，并发连接数我都会有测试，最后会有对比图。</p></li>
+</ul>
+
+<h1>基础知识</h1>
+
+<ul>
+<li>要编写计算机网络通信程序，首先要确定的就是通信的协议（protocol）。一般认为web服务器是一个长时间运行的程序（deamon）,它只是在响应来自网络的请求时才发送网络信息。协议的另外一端就是web客户程序，如某种浏览器。一般来说都是客户端向服务端发消息，服务端就一直等着。也有服务器向客户发起请求的异步回调（asynchronous callback）通信，但是一般还是如下图的客户端/服务器模式。</li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405174136597" alt=" 图1-1 客户和服务器"></p>
+
+<ul>
+<li>多个客户向一个服务器发送请求</li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405175300078" alt="这里写图片描述"></p>
+
+<ul>
+<li>web客户端和服务器使用TCP(Transmission Control Protocol，传输控制协议)通信。TCP又转而使用IP(Internet Protocol，网际协议)通信，IP通过链路层通信。下图表示通信层次【局域网的情况】.</li>
+<li>观察到虽然应用层是使用某种应用通信协议，比如FTP，HTTP。传输层都是是使用TCP协议。</li>
+<li>下图又展现了客户/服务端信息流的传送方向，客户把信息从上到下通过链路层传送到服务器端，服务端从链路层读取一直到应用层。</li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405175604645" alt="这里写图片描述"></p>
+
+<ul>
+<li>如果客户/服务端要在广域网通信则需要使用路由器。如下图</li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405182432642" alt="这里写图片描述"></p>
+
+<ul>
+<li>OSI模型
+下图所示，我们只关心传输层，以及数据链路层1500字数据限制，其他层都可以不管。</li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405182800575" alt="这里写图片描述"></p>
+
+<ul>
+<li>下面只介绍TCP,不介绍UDP，UDP相关资料请参考unix网络编程相关章节。TCP是一个复杂的、可靠的字节流协议。
+UDP不提供确认，序列号，超时，重传，RTT估算等机制。</li>
+<li>TCP提供客户与服务器之间的连接（connection）,客户端先和服务器建立连接，连接之后才能交换数据，最后连接终止。</li>
+<li>TCP提供可靠性，当TCP发数据要求对端要发送一个确认。如果没有收到数据就会重传数据，并且等待比上一次更长的时间[这个有算法计算往返时间（round-trip time,RTT)，多次失败以后才放弃。
+[注意TCP传送的数据不能保证100%正确，它只能保证客户端收到了没有，不保证正确性]</li>
+<li>TCP给每一个字节一个序号，对发送的数据进行排序。通过这种方式TCP接收端可以对乱序的数据根据序号进行排序，如果有一个字节是重复的（因为网络拥堵的情况重传了数据），接收端就可以通过相同的序号丢弃掉这个字节</li>
+<li>TCP提供流量控制（flow control）.TCP会告诉对端任何时刻能够可以接收的数据有多少，这个叫做通知窗口（advertised window）.任何时刻窗口接收缓冲区能够接收多少数据。</li>
+<li><p>TCP是全双工（full-duplex）的，既可以发数据，又可以接收数据，而且为每一个数据流方向都提供，流量控制，跟踪序列号等。</p></li>
+<li><p>TCP的建立</p></li>
+<li><p>三路握手</p></li>
+<li><p>服务端被动打开（passive open）,通过调用socket、bind、listen三个函数来完成。</p></li>
+<li><p>客户端主动打开（active open）,通过调用connect函数来完成,这会导致TCP发送一个SYN分节（分节里面含有连接建立以后传送数据的初始序号）</p></li>
+<li><p>服务器必须确认（ACK）客户的SYN,并且它也发送一个SYN(里面含有服务端在连接建立以后发送第一个字节数据的序号)</p></li>
+<li><p>客户必须确认服务端的SYN。
+这种交换至少需要三个分组，所以称为三路握手（three-way handshake）,下图表现三路握手 
+下图中客户的初始序号是J,服务器的初始序号是K,ACK是下一次希望接受的序号。SYN和FIN都占了一个字节，所以ACK要加1。
+注：分节是什么？
+网络各层是交换的信息单位是协议数据单元（protocol data unit,PDU）,分节（segment）就是对应与TCP传输层的PDU。分节的长度是有限的。每个分节所封装的数据可以是应用进程的字节流数据（就是tcp通过输出操作写到套接字中的数据），按顺序封装后传送给TCP接收端。下面这两剧很重要请注意，就是每个分节所封装的由应用进程的数据可能不完整，这取决于，对端所告知的最大分节大小，下面会讲，以及链路层的外出接口最大传输单元（MTU）.ip层（ipv4）所接收的最大数据为65535字节，所以运输层的数据不能超过这个数，还有传达链路层超过1500字节会分片。</p></li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405193517285" alt="这里写图片描述"></p>
+
+<ul>
+<li>TCP选项</li>
+<li>MSS选项。通知对端它的最大分节大小（maximum segment size），发送端使用接收端的MSS值作为所发分节的最大大小。</li>
+<li><p>窗口规模选项。TCP连接通知对端的最大窗口是65535</p></li>
+<li><p>TCP连接终止
+TCP连接终止需要四个分节</p></li>
+<li><p>应用进程主动关闭（active close）,调用close函数实现，该端的TCP发送一个FIN分节，表示数据发送完毕。</p></li>
+<li><p>接收端接收了这个FIN分节就会进行被动关闭(passive close),TCP还要给发送端一个确认。FIN放在排队的数据后面，作为一个文件结束符（end-of-file）传递给应用进程，对端接收到FIN以后就没数据读了。</p></li>
+<li><p>一段时间后收到文件描述符的应用进程也会调用close函数这也会导致它的TCP向发送方发FIN分节。</p></li>
+<li><p>接收到第二个FIN分节，发送端再确认这个分节。
+注意：第二步和第三部在FIN分节一起发送的时候就合并为一步。
+下图展示TCP连接终止</p></li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405233210236" alt="这里写图片描述"></p>
+
+<ul>
+<li>TCP状态转换图 TCP建立连接和连接终止
+黑线表示客户正常状态转换
+虚线表示服务器正常状态转化</li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405233923760" alt="这里写图片描述"></p>
+
+<ul>
+<li>下图是一个从开始建立连接，指示对端分节大小，服务端可以接收单个分节的最大大小是1460字节，客户端是536字节。建立连接就可以发送数据了，最后结束是四个分节。</li>
+</ul>
+
+<p><img src="http://img.blog.csdn.net/20150405235539608" alt="这里写图片描述"></p>
+
+<ul>
+<li><p>端口号
+使用端口号来区分进程。
+唯一表示一台服务器，客户端通过众所周知端口号（well-konwn port）。
+客户端使用创输层临时分配的端口号。</p></li>
+<li><p>套接字对
+TCP连接的两端的端口号+ip地址</p></li>
+<li><p>TCP端口号和并发服务器
+并发服务器通过主服务器派生子进程处理新的连接.
+比如在freebsd上启动一个服务器,端口号21,该主机多宿,ip地址12.106.32.254和192.168.42.1.服务器被动打开使用{* : 21,* : *},服务器在任意本地接口(第一个 * ),21端口号等待连接,这个称其为监听套接字,后面外地地址是用接收任意地址的客户的访问,所以用 * 表示.当服务器接收客户连接时,将连接交给子进程处理.连接建立后要把已连接套接字填入.
+<img src="http://img.blog.csdn.net/20150406162457291" alt="这里写图片描述"></p></li>
+<li><p>并发服务器让子进程处理客户
+<img src="http://img.blog.csdn.net/20150406162739325" alt="这里写图片描述"></p></li>
+<li><p>处理第二个客户,TCP客户主机第二个客户分配的端口号是1501
+<img src="http://img.blog.csdn.net/20150406163020161" alt="这里写图片描述"></p></li>
+<li><p>缓冲区大小
+ipv4定义了最小重组缓冲区大小(minimum reassembly buffer size),支持最小数据报大小是576字节.
+MSS最大值为65535
+以太网使用ipv4最大1460(tcp首部20字节,ipv4首部20字节)
+下面是重点注意
+每一个TCP套接字都有一个发送缓冲区,当某个应用进程调用write,内核从该应用进程复制数据到发送缓冲区,如果发送缓冲区放不下,应用进程进入睡眠.假设该套接字是阻塞的,内核不从write系统调用返回,直到应用进程缓冲区所有数据都复制到套接字发送缓冲区.从write返回仅仅表示应用进程数据复制到套接字发送缓冲区,并不表示对端接收到数据.
+<img src="http://img.blog.csdn.net/20150406165645124" alt="这里写图片描述"></p></li>
+</ul>
+</span>
+
+        
+        <div class="share">
+          <!-- Go to www.addthis.com/dashboard to customize your tools -->
+          <div class="addthis_sharing_toolbox"></div>
+        </div>
+        
+
+        <div class="tags"><small>
+          <i class="fa fa-tags"></i>
+            thumbnails, carte noire
+        </small></div>
+
+      </div>
+
+      <div class="content-panel feedback">
+        I <i class="fa fa-heart"></i> feedback.<br />
+        Let me know what you think of this article on twitter <a href="http://www.twitter.com/">@</a> or leave a comment below!
+      </div>
+
+      
+      <div class="content-panel comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+      </div>
+      
+
+      <div class="content-panel related clearfix">
+        
+        <div class="related-header">
+          <a href="/data/structure/2015/07/18/%E9%98%9F%E5%88%97%E5%8F%8A%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0/">Read More</a>
+        </div>
+          <div class="title">
+            <a href="/data/structure/2015/07/18/%E9%98%9F%E5%88%97%E5%8F%8A%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0/">队列及栈的实现</a>
+          </div>
+          <div class="excerpt">
+            ### 一. 链表
+
+
+            <a href="/data/structure/2015/07/18/%E9%98%9F%E5%88%97%E5%8F%8A%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0/">Continue Reading</a>
+          </div>
+        
+        <hr />
+        <div class="previous previous-next">
+          
+          <p>
+            <a href="/2015/07/18/unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B2/">Unix网络编程2</a>
+          </p>
+          <p class="date">Published July 18, 2015</p>
+          
+        </div>
+        <div class="next previous-next">
+          
+          <p>
+            <a href="/data/structure/2015/07/18/%E9%98%9F%E5%88%97%E5%8F%8A%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0/">队列及栈的实现</a>
+          </p>
+          <p class="date">Published July 18, 2015</p>
+          
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+function disqus_config() { this.experiment.enable_scroll_container = true; }
+var disqus_shortname = "cartenoire"; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+      </div>
+    </div>
+
+    <div class="footer clearfix">
+  <div class="col-md-6">
+    Made with By Fantasy
+  </div>
+  <div class="col-md-6">
+    
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.mmenu.min.all.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#my-menu").mmenu().on( "closed.mm", function() {
+            $(".menu-button").show();
+         });
+      $(".menu-button").click(function() {
+        $(".menu-button").hide();
+        $("#my-menu").trigger("open.mm");
+      });
+   });
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20365477-4']);
+          _gaq.push(['_trackPageview']);
+  (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+    </body>
+</html>
