@@ -5,6 +5,7 @@ date:       2015-08-01 16:32:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
 thumbnail: jekyll
+fan: https://raw.githubusercontent.com/fantasyming/Dream-Maker/master/1.jpg
 tags:
  - lvlv
  - Beastality
