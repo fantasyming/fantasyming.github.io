@@ -9,8 +9,10 @@ layout: default
   {% if minutes == 0 %}{% assign minutes = 1 %}{% endif %}
 {% endif %}
 -->
-
-  
+<div align="center">
+  <a href="index.html">
+  <img src="http://blackmonkey-pro.com/wp-content/uploads/projects/fertilize/fertilize-960x600.jpg" width="100%" height="300px" /> 
+  </a>
 </div>
 <div class="container-fluid single">
   <div class="row">
@@ -57,7 +59,7 @@ layout: default
       -->
       <div class="content-panel content">
         <span itemprop="articleBody">{{ content }}</span>
-
+        <!--
         {% if site.addthis_id %}
         <div class="share">
            Go to www.addthis.com/dashboard to customize your tools
@@ -69,7 +71,7 @@ layout: default
           <i class="fa fa-tags"></i>
             {{ page.tags | join: ', ' }}
         </small></div>
-
+      -->
       </div>
     
 
@@ -77,6 +79,7 @@ layout: default
         欢迎评论提问
       </div>
      -->
+     <!--
       {% if site.disqus_account %}
       <div class="content-panel comments">
         <div id="disqus_thread">
@@ -116,7 +119,7 @@ layout: default
           <p class="date">Published {{ page.next.date | date: "%B %-d, %Y" }}</p>
           {% endif %}
         </div>
-      </div>
+      </div>-->
 
     </div>
 
