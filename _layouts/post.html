@@ -8,7 +8,11 @@ layout: default
   {% assign minutes = content | number_of_words | divided_by: 180 %}
   {% if minutes == 0 %}{% assign minutes = 1 %}{% endif %}
 {% endif %}
-
+<div align="center">
+  <a href="index.html">
+    <img src="http://blackmonkey-pro.com/wp-content/uploads/projects/fertilize/fertilize_banner-960x267.jpg" />
+  </a>
+</div>
 <div class="container-fluid single">
   <div class="row">
 
@@ -45,13 +49,13 @@ layout: default
           under {% if page.categories %}{% for category in page.categories limit:1 %}{{ category }}{% endfor %}{% endif %}
         </i></small>
       </div>
-
+      <!--
       <div class="read-time">
         <small>
           {{ minutes }} minute read
         </small>
       </div>
-      
+      -->
       <div class="content-panel content">
         <span itemprop="articleBody">{{ content }}</span>
 
