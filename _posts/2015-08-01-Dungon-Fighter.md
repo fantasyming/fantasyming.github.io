@@ -6,7 +6,6 @@ summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
 thumbnail: jekyll
 tags:
- - lvlv
  - Beastality
  - Bara 
  - Ful Color
