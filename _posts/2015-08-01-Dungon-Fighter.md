@@ -5,7 +5,7 @@ date:       2015-08-01 15:32:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
 thumbnail: jekyll
-tags:
+tags: https://raw.githubusercontent.com/fantasyming/Dungeon-Fighter-Online/master/1.jpg
  - Beastality
  - Bara 
  - Ful Color
