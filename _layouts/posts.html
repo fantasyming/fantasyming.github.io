@@ -10,7 +10,8 @@ layout: default
 {% endif %}
 -->
 
-
+  
+</div>
 <div class="container-fluid single">
   <div class="row">
 
@@ -26,7 +27,7 @@ layout: default
       {% endif %}
 
       <h1 class="header" itemprop="name">{{ page.title }}</h1>
-
+      <!--
       <div class="author">
         <small><i>
           by
@@ -47,6 +48,7 @@ layout: default
           under {% if page.categories %}{% for category in page.categories limit:1 %}{{ category }}{% endfor %}{% endif %}
         </i></small>
       </div>
+      -->
       <!--
       <div class="read-time">
         <small>
@@ -56,7 +58,7 @@ layout: default
       -->
       <div class="content-panel content">
         <span itemprop="articleBody">{{ content }}</span>
-        <!--
+
         {% if site.addthis_id %}
         <div class="share">
            Go to www.addthis.com/dashboard to customize your tools
@@ -68,7 +70,7 @@ layout: default
           <i class="fa fa-tags"></i>
             {{ page.tags | join: ', ' }}
         </small></div>
-      -->
+
       </div>
     
 
@@ -76,7 +78,6 @@ layout: default
         欢迎评论提问
       </div>
      -->
-     <!--
       {% if site.disqus_account %}
       <div class="content-panel comments">
         <div id="disqus_thread">
@@ -116,7 +117,7 @@ layout: default
           <p class="date">Published {{ page.next.date | date: "%B %-d, %Y" }}</p>
           {% endif %}
         </div>
-      </div>-->
+      </div>
 
     </div>
 
