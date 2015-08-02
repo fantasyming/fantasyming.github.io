@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      CG Collection 2
+title:      Monthly Mentaiko Vol01
 date:       2015-08-02 15:32:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: CG
