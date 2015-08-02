@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Kaku THE Tou
-date:       2015-07-01 12:32:18
+date:       2015-08-01 12:32:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: CG
 thumbnail: jekyll
