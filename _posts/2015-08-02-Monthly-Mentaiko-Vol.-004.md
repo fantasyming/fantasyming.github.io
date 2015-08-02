@@ -5,9 +5,9 @@ date:       2015-08-02 10:32:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: CG
 thumbnail: jekyll
-fan: https://raw.githubusercontent.com/fantasyming/CG-Collection-2/master/1.jpg
+fan: https://raw.githubusercontent.com/fantasyming/Monthly-Mentaiko-Vol.-004/master/56.jpg
 tags:
- - Wasukoro
+ - Mentaiko
  - Bara
  - CG
  - Full Color
