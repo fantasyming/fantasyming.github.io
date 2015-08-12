@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Cross Bread
+title:      Traumatic Phantasm
 date:       2015-08-12 11:09:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
