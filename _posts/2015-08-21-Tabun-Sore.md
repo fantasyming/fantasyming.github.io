@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Tabun Sore
-date:       2015-08-21 2:28:18
+date:       2015-08-22 2:28:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
 thumbnail: jekyll

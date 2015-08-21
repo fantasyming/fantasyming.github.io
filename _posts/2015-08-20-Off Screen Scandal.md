@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Off Screen Scandal
-date:       2015-08-20 23:28:18
+date:       2015-08-20 24:28:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
 thumbnail: jekyll
