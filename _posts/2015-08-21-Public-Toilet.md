@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Public Toilet
-date:       2015-08-21 2:30:18
+date:       2015-08-22 2:30:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
 thumbnail: jekyll
