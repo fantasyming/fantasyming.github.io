@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Banana-Jam-S
+title:      Banana Jam S
 date:       2015-08-21 1:28:18
 summary:    Using thumbnails in your Carte Noire articles.
 categories: BL漫画
@@ -12,11 +12,6 @@ tags:
  - Bara 
  - Muscle
 ---
-
-
-
-
-
 
 
 ![1](https://raw.githubusercontent.com/fantasyming/Banana-Jam-S/master/1.jpg)
