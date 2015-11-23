@@ -29,3 +29,6 @@ redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables","strikethrough", "superscript"]
 permalink: pretty
 exclude: [vendor]
+paginate: 5
+paginate_path: "page:num"
+

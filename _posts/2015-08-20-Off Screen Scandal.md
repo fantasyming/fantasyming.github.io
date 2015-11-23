@@ -14,8 +14,6 @@ tags:
 ---
 
 
-
-
 ![1](https://raw.githubusercontent.com/fantasyming/Off-Screen-Scandal/master/1.jpg)
 
 ![2](https://raw.githubusercontent.com/fantasyming/Off-Screen-Scandal/master/2.jpg)
